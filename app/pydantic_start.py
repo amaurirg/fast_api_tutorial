@@ -1,4 +1,6 @@
+from datetime import datetime
 from typing import Union, List, Optional
+from uuid import UUID, uuid4
 
 from fastapi import FastAPI, Query, Path, Body
 from pydantic import BaseModel, Field, HttpUrl
@@ -124,7 +126,15 @@ async def read_products():
 
 
 @app.post("/products/create/")
-async def create_product(product: Product):
+async def create_product(
+        product: Product = Body(
+            example={
+                "name": "Carro",
+                "description": "Descrição do carro",
+                "price": 15000,
+                "tax": 1500
+            }
+        )):
     results = {
         "products": [
             {
