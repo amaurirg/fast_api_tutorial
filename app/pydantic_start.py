@@ -1,6 +1,4 @@
-from datetime import datetime
-from typing import Union, List, Optional
-from uuid import UUID, uuid4
+from typing import Optional
 
 from fastapi import FastAPI, Query, Path, Body
 from pydantic import BaseModel, Field, HttpUrl
@@ -10,14 +8,14 @@ app = FastAPI()
 
 class Item(BaseModel):
     name: str
-    description: Union[str, None] = None
+    description: str | None = None
     price: float
-    tax: Union[float, None] = None
+    tax: float | None = None
 
 
 class User(BaseModel):
     username: str
-    full_name: Union[str, None] = None
+    full_name: str | None = None
 
 
 class Image(BaseModel):
@@ -28,7 +26,7 @@ class Image(BaseModel):
 
 class Product(BaseModel):
     name: str
-    description: Union[str, None] = Field(
+    description: str | None = Field(
         default=None,
         description="The description of the item",
         max_length=30
@@ -37,9 +35,9 @@ class Product(BaseModel):
         gt=0,
         description="The price must be greater than zero"
     )
-    tax: Union[float, None] = None
-    key_words: List[str] = list()
-    image: Optional[Union[List[Image], None]]
+    tax: float | None = None
+    key_words: list[str] = list()
+    image: Optional[list[Image] | None]
 
 
 @app.get("/")
@@ -48,7 +46,7 @@ async def hello_world():
 
 
 @app.get("/items/")
-async def read_items(date_now: str, q: Union[str, None] = Query(
+async def read_items(date_now: str, q: str | None = Query(
     default=None, min_length=3, max_length=5, regex="^teste$")):
     results = {"date_now": date_now, "items": [{"item_id": "Foo"}, {"item_id": "Bar"}]}
     if q:
@@ -68,9 +66,9 @@ async def create_item(item: Item):
 @app.put("/items/{item_id}")
 async def update_item(
         *,
-        item_id: int = Path(title="The ID of the item to get", ge=5, le=10),
-        q: Union[str, None] = None,
-        item: Union[Item, None] = None,
+        item_id: int = Path(..., title="The ID of the item to get", ge=5, le=10),
+        q: str | None = None,
+        item: Item | None = None,
 ):
     results = {"item_id": item_id}
     if q:
@@ -81,7 +79,7 @@ async def update_item(
 
 
 @app.get("/new-items/")
-async def read_new_items(q: Union[List[str], None] = Query(
+async def read_new_items(q: list[str] | None = Query(
     default=None,
     alias="item-query",
     title="Query string",
@@ -94,7 +92,7 @@ async def read_new_items(q: Union[List[str], None] = Query(
 
 
 @app.put("/new-items/{item_id}")
-async def update_new_items(item_id: int, item: Item, user: User, importance: int = Body(gt=0)):
+async def update_new_items(item_id: int, item: Item, user: User, importance: int = Body(..., gt=0)):
     results = {
         "item_id": item_id,
         "item": item,
@@ -105,7 +103,7 @@ async def update_new_items(item_id: int, item: Item, user: User, importance: int
 
 
 @app.post("/new-items/")
-async def create_new_item(item: Item = Body(embed=True)):
+async def create_new_item(item: Item = Body(..., embed=True)):
     result = {"item_id": 1, "item": item}
     return result
 
@@ -128,6 +126,7 @@ async def read_products():
 @app.post("/products/create/")
 async def create_product(
         product: Product = Body(
+            ...,
             example={
                 "name": "Carro",
                 "description": "Descrição do carro",
