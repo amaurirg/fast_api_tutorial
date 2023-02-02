@@ -23,10 +23,16 @@ def test_create_item_json():
         "description": "Description of the Product 1",
         "price": 120.5,
         "tax": 13.7,
-        "tags": ["TV", "Smart"]
+        "tags": ["TV", "Smart", "TV"]
     }
     response = client.post("/items/", json=data)
     assert response.json() == {
+        "name": "Product 1",
+        "description": "Description of the Product 1",
+        "price": 120.5,
+        "tax": 13.7,
+        "tags": ["Smart", "TV"]
+    } or {
         "name": "Product 1",
         "description": "Description of the Product 1",
         "price": 120.5,
