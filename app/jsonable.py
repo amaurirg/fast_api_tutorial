@@ -27,19 +27,21 @@ def update_item(id: str, item: Item):
     json_compatible_item_data = jsonable_encoder(item)
     fake_db[id] = json_compatible_item_data
 
-    # Comparação entre item e json_compatible_item_data
-    # item = Item(
-    #     title='Título do Item',
-    #     timestamp=datetime.datetime(2023, 2, 1, 22, 59, 31, 529459),
-    #     description='Descrição do Item'
-    # )
-    # json_compatible_item_data = {
-    #     'title': 'Título do Item',
-    #     'timestamp': '2023-02-01T22:59:31.529459',
-    #     'description': 'Descrição do Item'
-    # }
+    '''
+    Comparação entre item e json_compatible_item_data
+    item = Item(
+        title='Título do Item',
+        timestamp=datetime.datetime(2023, 2, 1, 22, 59, 31, 529459),
+        description='Descrição do Item'
+    )
+    json_compatible_item_data = {
+        'title': 'Título do Item',
+        'timestamp': '2023-02-01T22:59:31.529459',
+        'description': 'Descrição do Item'
+    }
 
     return fake_db
+    '''
 
 
 items = {
