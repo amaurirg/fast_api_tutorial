@@ -1,7 +1,6 @@
 from fastapi.testclient import TestClient
 from app.patch_update import app
 
-
 client = TestClient(app)
 
 
@@ -10,6 +9,18 @@ def test_read_item_status_code():
     assert response.status_code == 200
 
 
+def test_read_item_empty_data_json():
+    data = {}
+    response = client.patch("/items/bar", json=data)
+    assert response.json() == {
+        "name": "Bar",
+        "description": "The bartenders",
+        "price": 62,
+        "tax": 20.2,
+        "tags": []
+    }
+
+    
 def test_read_item_json():
     data = {
         "name": "Bar",
@@ -24,3 +35,6 @@ def test_read_item_json():
         "tax": 23.8,
         "tags": []
     }
+
+
+
