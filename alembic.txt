@@ -1,3 +1,6 @@
+Instala o alembic
+pip install alembic
+
 Inicia o ambiente
 alembic init alembic
 
@@ -6,3 +9,6 @@ alembic revision --autogenerate -m "Cria tabela de contas a pagar e receber"
 
 Atualiza migrations
 alembic upgrade head
+
+Rollback migration
+alembic downgrade -1

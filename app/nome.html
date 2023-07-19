@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Nome com sobrenome e idade aleatórios</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .container {
+        max-width: 500px;
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      h1 {
+        font-size: 2em;
+        margin-bottom: 20px;
+      }
+
+      input {
+        margin-bottom: 10px;
+        padding: 10px;
+        font-size: 1em;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      button {
+        margin-top: 10px;
+        padding: 10px;
+        font-size: 1em;
+        border-radius: 5px;
+        background-color: #1e90ff;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #3cb371;
+      }
+
+      p {
+        font-size: 1.5em;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Qual é o seu nome?</h1>
+      <form id="name-form">
+        <input
+          type="text"
+          id="first-name"
+          placeholder="Primeiro nome"
+          required
+        />
+        <button type="submit">Enviar</button>
+      </form>
+      <p id="full-name"></p>
+    </div>
+    <script src="app.js"></script>
+    <script>
+      const nameForm = document.getElementById("name-form");
+      const firstName = document.getElementById("first-name");
+      const fullName = document.getElementById("full-name");
+
+      const surnames = [
+        "Silva",
+        "Santos",
+        "Souza",
+        "Oliveira",
+        "Pereira",
+        "Rodrigues",
+        "Almeida",
+        "Costa",
+        "Carvalho",
+        "Ferreira",
+      ];
+
+      nameForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const name = firstName.value;
+        const randomSurname =
+          surnames[Math.floor(Math.random() * surnames.length)];
+        const randomAge = Math.floor(Math.random() * 100) + 1;
+        const fullNameText = `Seu nome completo é: ${name} ${randomSurname}, e você tem ${randomAge} anos de idade.`;
+        fullName.textContent = fullNameText;
+      });
+    </script>
+  </body>
+</html>

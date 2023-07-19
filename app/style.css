@@ -1,0 +1,120 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+main {
+  grid-area: conteudo;
+  /* border: 2px solid gray; */
+  margin: 5px;
+  font-size: 25px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 12fr;
+  grid-template-areas:
+    "question"
+    "answer";
+}
+
+header {
+  /* border: 2px solid blue; */
+  grid-area: cabecalho;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px;
+}
+
+footer {
+  grid-area: rodape;
+  background-color: gray;
+  color: white;
+  margin: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* form {
+  width: 60%;
+} */
+
+.question {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-area: question;
+  /* border: 2px solid purple; */
+  margin: 5px;
+}
+
+.answer {
+  grid-area: answer;
+  /* border: 2px solid red; */
+  display: flex;
+  justify-content: center;
+  margin: 5px;
+  display: grid;
+  font-size: 25px;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 12fr;
+  grid-template-areas:
+    "text-answer"
+    "p-answer";
+}
+
+.text-answer {
+  grid-area: text-answer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px;
+}
+
+.p-answer {
+  grid-area: p-answer;
+  background-color: #f7f7f7;
+  width: 70%;
+  border: 2px solid gray;
+  margin: 5px auto;
+  border-radius: 5px;
+  box-shadow: 2px 2px gray;
+  padding: 30px;
+  text-align: justify;
+}
+
+
+.input-question {
+  font-size: 25px;
+  width: 60vw;
+  padding: 7px;
+  border: 2px solid gray;
+  border-radius: 5px;
+  box-shadow: 1px 1px gray;
+}
+
+#app {
+  background-color: #f1f1f1;
+  display: grid;
+  font-size: 25px;
+  color: #444;
+  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 10fr 1fr;
+  grid-template-areas:
+    "cabecalho"
+    "conteudo"
+    "rodape";
+}
+
+/* @media(max-width: 600px) or (max-height: 600px) {
+  #app {
+      grid-template-columns: 1fr;
+      grid-template-rows: 5fr;
+      grid-template-areas: 'conteudo';
+  }
+
+  header { display: none; }
+  footer { display: none; }
+} */
